@@ -121,6 +121,27 @@ const getProductsByCategory = async (req, res) => {
   }
 };
 
+const getProductsByPriceRange = async (req, res) => {
+  const { rango } = req.params;
+  const [min, max] = rango.split("-");
+
+  try {
+    const products = await Product.find({
+      precio: { $gte: min, $lte: max },
+    });
+
+    if (products.length === 0) {
+      return res.status(404).json({
+        message: "No se encontraron productos en ese rango de precios",
+      });
+    } else {
+      return res.json(products);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   getAllProducts,
   searchProducts,
@@ -129,4 +150,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductsByCategory,
+  getProductsByPriceRange,
 };

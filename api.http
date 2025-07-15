@@ -101,6 +101,10 @@ Accept: application/json
 GET {{api_url}}/productos/precio/100-500
 Accept: application/json
 
+### 8.1. Buscar productos en un rango sin coincidencias
+GET {{api_url}}/productos/precio/10-15
+Accept: application/json
+
 ### 9. Carga masiva de productos
 # Agrega múltiples productos en una sola petición.
 POST {{api_url}}/productos/masivo

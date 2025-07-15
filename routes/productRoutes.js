@@ -7,6 +7,7 @@ const {
   updateProduct,
   deleteProduct,
   getProductsByCategory,
+  getProductsByPriceRange,
 } = require("../controllers/productController");
 
 router.get("/", getAllProducts);
@@ -16,5 +17,6 @@ router.post("/", createProduct);
 router.put("/:codigo", updateProduct);
 router.delete("/:codigo", deleteProduct);
 router.get("/categoria/:categoria", getProductsByCategory);
+router.get("/precio/:rango", getProductsByPriceRange);
 
 module.exports = router;
