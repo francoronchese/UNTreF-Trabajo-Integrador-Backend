@@ -1,0 +1,27 @@
+{
+  "name": "untref-trabajo-integrador-backend",
+  "version": "1.0.0",
+  "description": "API REST de productos de computación",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francoronchese/UNTreF-Trabajo-Integrador-Backend.git"
+  },
+  "keywords": [],
+  "author": "Lucas Franco Ronchese",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/francoronchese/UNTreF-Trabajo-Integrador-Backend/issues"
+  },
+  "homepage": "https://github.com/francoronchese/UNTreF-Trabajo-Integrador-Backend#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.3"
+  }
+}
