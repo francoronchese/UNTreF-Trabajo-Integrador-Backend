@@ -101,6 +101,26 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getProductsByCategory = async (req, res) => {
+  const { categoria } = req.params;
+
+  try {
+    const products = await Product.find({
+      categoria: { $regex: categoria, $options: "i" },
+    });
+
+    if (products.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No se encontraron productos para esa categoría" });
+    } else {
+      return res.json(products);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   getAllProducts,
   searchProducts,
@@ -108,4 +128,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductsByCategory,
 };

@@ -77,12 +77,12 @@ Accept: application/json
 GET {{api_url}}/productos/buscar?q=Laptop
 Accept: application/json
 
-### 6.2 Buscar con término inexistente
+### 6.1 Buscar con término inexistente
 # Busca productos con término que no exista en ningún nombre.
 GET {{api_url}}/productos/buscar?q=Heladera
 Accept: application/json
 
-### 6.3 Buscar sin término (q vacío)
+### 6.2 Buscar sin término (q vacío)
 # No pasa parámetro de búsqueda
 GET {{api_url}}/productos/buscar
 Accept: application/json
@@ -90,6 +90,10 @@ Accept: application/json
 ### 7. Filtrar productos por categoría
 # Busca productos que pertenezcan a la categoría 'Accesorios'.
 GET {{api_url}}/productos/categoria/Accesorios
+Accept: application/json
+
+### 7.1 Filtrar productos por categoría - Categoría no encontrada
+GET {{api_url}}/productos/categoria/CategoriaInexistente
 Accept: application/json
 
 ### 8. Filtrar productos por rango de precio
