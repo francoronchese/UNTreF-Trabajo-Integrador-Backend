@@ -4,6 +4,7 @@ const {
   searchProducts,
   getProductByCode,
   createProduct,
+  createMultipleProducts,
   updateProduct,
   deleteProduct,
   getProductsByCategory,
@@ -14,6 +15,7 @@ router.get("/", getAllProducts);
 router.get("/buscar", searchProducts);
 router.get("/:codigo", getProductByCode);
 router.post("/", createProduct);
+router.post("/masivo", createMultipleProducts);
 router.put("/:codigo", updateProduct);
 router.delete("/:codigo", deleteProduct);
 router.get("/categoria/:categoria", getProductsByCategory);

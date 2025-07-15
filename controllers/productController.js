@@ -67,6 +67,61 @@ const createProduct = async (req, res) => {
   }
 };
 
+const createMultipleProducts = async (req, res) => {
+  const products = req.body;
+
+  if (!Array.isArray(products)) {
+    return res
+      .status(400)
+      .json({ message: "El cuerpo debe ser un array de productos" });
+  }
+
+  const inserted = [];
+  const errors = [];
+
+  for (const product of products) {
+    const { codigo, nombre, precio, categoria } = product;
+
+    if (!codigo || !nombre || !precio || !categoria) {
+      errors.push({ producto: product, error: "Faltan campos obligatorios" });
+      continue;
+    }
+
+    const exists = await Product.findOne({ codigo });
+    if (exists) {
+      errors.push({ producto: product, error: "El código ya existe" });
+      continue;
+    }
+
+    try {
+      const newProduct = new Product(product);
+      const insertProduct = await newProduct.save();
+      inserted.push(insertProduct);
+    } catch (error) {
+      errors.push({
+        producto: product,
+        error: "Error al guardar",
+      });
+      continue;
+    }
+  }
+
+  if (inserted.length === 0) {
+    return res.status(400).json({
+      message: "No se pudo insertar ningún producto válido",
+      errors,
+    });
+  } else if (errors.length === 0) {
+    return res.status(201).json(inserted);
+  } else {
+    return res.status(201).json({
+      message: "Algunos productos no se pudieron insertar",
+      inserted,
+      errors,
+    });
+  }
+};
+
 const updateProduct = async (req, res) => {
   const { codigo } = req.params;
   try {
@@ -147,6 +202,7 @@ module.exports = {
   searchProducts,
   getProductByCode,
   createProduct,
+  createMultipleProducts,
   updateProduct,
   deleteProduct,
   getProductsByCategory,
