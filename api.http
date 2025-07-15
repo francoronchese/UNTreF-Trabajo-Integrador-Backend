@@ -9,7 +9,6 @@ GET {{api_url}}/productos
 Accept: application/json
 
 ### 2. Obtener un producto por su código
-# Reemplaza '1' con un código de producto que exista en tu base de datos.
 GET {{api_url}}/productos/1478
 Accept: application/json
 
@@ -18,8 +17,6 @@ GET {{api_url}}/productos/1000
 Accept: application/json
 
 ### 3. Crear un nuevo producto
-# Este endpoint agrega un nuevo producto.
-# Asegúrate de que el 'codigo' sea único.
 POST {{api_url}}/productos
 Content-Type: application/json
 
@@ -52,8 +49,6 @@ Content-Type: application/json
 }
 
 ### 4. Modificar un producto existente
-# Reemplaza '1' con un código de producto que exista.
-# Solo se necesita enviar los campos a modificar.
 PUT {{api_url}}/productos/1000
 Content-Type: application/json
 
@@ -69,9 +64,7 @@ Content-Type: application/json
     "precio": 12
 }
 
-
 ### 5. Eliminar un producto
-# Reemplaza '2' con un código de producto que desees eliminar.
 DELETE {{api_url}}/productos/1000
 Accept: application/json
 
@@ -82,6 +75,16 @@ Accept: application/json
 ### 6. Buscar productos por término
 # Busca productos que contengan 'Laptop' en su nombre.
 GET {{api_url}}/productos/buscar?q=Laptop
+Accept: application/json
+
+### 6.2 Buscar con término inexistente
+# Busca productos con término que no exista en ningún nombre.
+GET {{api_url}}/productos/buscar?q=Heladera
+Accept: application/json
+
+### 6.3 Buscar sin término (q vacío)
+# No pasa parámetro de búsqueda
+GET {{api_url}}/productos/buscar
 Accept: application/json
 
 ### 7. Filtrar productos por categoría

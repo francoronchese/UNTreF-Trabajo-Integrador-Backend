@@ -9,6 +9,28 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  const { q } = req.query;
+
+  if (!q) {
+    return res.json([]);
+  }
+
+  try {
+    const products = await Product.find({
+      nombre: { $regex: q, $options: "i" },
+    });
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: "No se encontraron productos" });
+    } else {
+      return res.json(products);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 const getProductByCode = async (req, res) => {
   const { codigo } = req.params;
   try {
@@ -81,6 +103,7 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   getAllProducts,
+  searchProducts,
   getProductByCode,
   createProduct,
   updateProduct,
